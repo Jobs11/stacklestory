@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacklestory/functions/datas.dart';
 import 'dart:math' as math;
 
+import 'package:stacklestory/icons/dragicons.dart';
+import 'package:stacklestory/icons/dragmovepare.dart';
+
 class Maingame extends StatefulWidget {
   const Maingame({super.key});
 
@@ -12,6 +15,14 @@ class Maingame extends StatefulWidget {
 
 class _MaingameState extends State<Maingame> {
   int score = 12800;
+  MonsterQueue mq = MonsterQueue(4);
+  int stage = 6;
+
+  @override
+  void initState() {
+    super.initState();
+    mq = MonsterQueue(stage);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -195,32 +206,25 @@ class _MaingameState extends State<Maingame> {
                       ),
                     ),
                     SizedBox(
-                      width: 204.w,
+                      width: 134.w,
                       height: 80.h,
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
                           Image.asset(
                             'assets/images/icons/양피지.png',
-                            width: 204.w,
+                            width: 134.w,
                             height: 80.h,
                             fit: BoxFit.fill,
                           ),
                           Padding(
-                            padding: EdgeInsets.all(5.0.w),
+                            padding: EdgeInsets.fromLTRB(35.w, 5.h, 35.w, 5.h),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Image.asset(
-                                  'assets/images/monsters/달수.png',
-                                  width: 25.w,
-                                  height: 25.h,
-                                ),
-                                Image.asset(
-                                  'assets/images/monsters/리수.png',
-                                  width: 25.w,
-                                  height: 25.h,
-                                ),
+                                monsterByIndex(mq.queue[1]),
+
+                                monsterByIndex(mq.queue[2]),
                               ],
                             ),
                           ),
@@ -229,7 +233,33 @@ class _MaingameState extends State<Maingame> {
                     ),
                   ],
                 ),
-                SizedBox(height: 75),
+                SizedBox(height: 10.h),
+
+                DragMovePair(
+                  pumpkinAsset: 'assets/images/icons/집게.png',
+                  overlayAsset: monsterData[mq.queue[0]]['name'],
+                  iconSize: 120,
+                  overlaySize: monsterData[mq.queue[0]]['size'],
+                  overlayDy: 30,
+                  padding: 10,
+                  onTap: () {
+                    mq.next();
+
+                    setState(() {});
+                  },
+                ),
+
+                // Container(
+                //   color: Colors.transparent,
+                //   height: 120,
+                //   width: double.infinity,
+                //   child: Dragicons(
+                //     assetPath: 'assets/images/icons/집게.png',
+                //     size: 120,
+                //     padding: 10,
+                //   ),
+                // ),
+                SizedBox(height: 10.h),
                 Container(
                   margin: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 0.h),
                   padding: EdgeInsets.fromLTRB(2.w, 16.h, 2.w, 12.h),
@@ -238,6 +268,9 @@ class _MaingameState extends State<Maingame> {
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   height: 500.h,
+                  child: SingleChildScrollView(
+                    child: Column(children: [getRandomMonster(7)]),
+                  ),
                 ),
               ],
             ),
