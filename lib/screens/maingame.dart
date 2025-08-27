@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacklestory/functions/datas.dart';
+import 'package:stacklestory/icons/arrowline.dart';
 import 'dart:math' as math;
 
 import 'package:stacklestory/icons/dragmovepare.dart';
+import 'package:stacklestory/icons/glassrecttank.dart';
 
 class Maingame extends StatefulWidget {
   const Maingame({super.key});
@@ -237,14 +239,15 @@ class _MaingameState extends State<Maingame> {
                 DragMovePair(
                   pumpkinAsset: 'assets/images/icons/집게.png',
                   overlayAsset: monsterData[mq.queue[0]]['name'],
-                  iconSize: 80,
+                  iconSize: 60,
                   overlaySize: monsterData[mq.queue[0]]['size'],
-                  overlayDy: 20,
+                  overlayDy: overlayDyFromSize(
+                    monsterData[mq.queue[0]]['size'],
+                  ),
                   padding: 10,
-                  onTap: () {
-                    mq.next();
-
-                    setState(() {});
+                  onDropEnd: () {
+                    mq.next(); // 드랍 완전히 끝난 시점에 큐 진행
+                    setState(() {}); // UI 갱신
                   },
                 ),
 
@@ -258,47 +261,48 @@ class _MaingameState extends State<Maingame> {
                 //     padding: 10,
                 //   ),
                 // ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 0.h),
-                  padding: EdgeInsets.fromLTRB(2.w, 16.h, 2.w, 12.h),
-                  decoration: BoxDecoration(
-                    color: Color(0x8CFFFFFF),
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  height: 400.h,
-                  width: double.infinity,
-                  child: SingleChildScrollView(
+                Padding(
+                  padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 0),
+                  child: GlassRectTank(
+                    height: 400.h,
+                    width: double.infinity,
                     child: Column(children: [getRandomMonster(7)]),
                   ),
                 ),
+                SizedBox(height: 10.h),
 
-                Stack(
-                  clipBehavior: Clip.none, // 필요 시 클리핑 해제
-                  alignment: Alignment.center,
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      height: 80.h,
-                      child: Image.asset(
-                        upgradeimg[Backgroundnum.bn],
-                        fit: BoxFit.fill,
-                      ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 0.h),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.r),
+                      color: Color(0x4DFFFFFF),
                     ),
-                    // Row에게 '타이트한' 폭 제약 주기
-                    Positioned.fill(
-                      child: Center(
-                        child: Padding(
+                    height: 60.h,
+                    child: Column(
+                      children: [
+                        Padding(
+                          // 아이콘 나열(동일 크기)
                           padding: EdgeInsets.symmetric(
-                            horizontal: 60.0,
-                          ), // 여백 필요시
+                            horizontal: 12.w,
+                            vertical: 5.h,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: monsterUpgrade, // List<Widget> 여야 함
+                            children: monsterUpgrade,
                           ),
                         ),
-                      ),
+                        ArrowLine(
+                          // 화살표 바
+                          color: Color(0xFF3A3A3A),
+                          thickness: 4,
+                          headLength: 16,
+                          headWidth: 12,
+                          horizontalPadding: 12,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),

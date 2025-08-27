@@ -18,7 +18,12 @@ List<String> upgradeimg = [
 ];
 
 class Backgroundnum {
-  static int bn = 0;
+  static int bn = 3;
+}
+
+double overlayDyFromSize(double overlaySized) {
+  final s = overlaySized.clamp(0.0, 105.0).toDouble();
+  return (5.0 + 10.0 * (s / 105.0)).roundToDouble(); // 10..20 보장
 }
 
 final List<Widget> monsterUpgrade = [
@@ -37,17 +42,17 @@ final List<Widget> monsterUpgrade = [
 
 // 단계별 몬스터 정의 (파일명, 크기)
 final List<Map<String, dynamic>> monsterData = [
-  {"name": "달수", "size": 15.0},
-  {"name": "슬수", "size": 30.0},
-  {"name": "주수", "size": 45.0},
-  {"name": "리수", "size": 60.0},
-  {"name": "루수", "size": 75.0},
-  {"name": "주루수", "size": 90.0},
-  {"name": "스수", "size": 105.0},
-  {"name": "월수", "size": 120.0},
-  {"name": "예수", "size": 135.0},
-  {"name": "핑수", "size": 150.0},
-  {"name": "블수", "size": 165.0},
+  {"name": "달수", "size": 15.0}, // 1단계
+  {"name": "슬수", "size": 30.0}, // 2단계
+  {"name": "주수", "size": 45.0}, // 3단계
+  {"name": "리수", "size": 60.0}, // 4단계
+  {"name": "루수", "size": 75.0}, // 5단계
+  {"name": "주루수", "size": 90.0}, // 6단계
+  {"name": "스수", "size": 105.0}, // 7단계
+  {"name": "월수", "size": 120.0}, // 8단계
+  {"name": "예수", "size": 135.0}, // 9단계
+  {"name": "핑수", "size": 150.0}, // 10단계
+  {"name": "블수", "size": 165.0}, // 11단계
   // 이후 월묘, 예티, 핑크빈, 블랙빈도 추가 가능
 ];
 
