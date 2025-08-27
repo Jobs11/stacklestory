@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacklestory/functions/datas.dart';
 import 'dart:math' as math;
 
-import 'package:stacklestory/icons/dragicons.dart';
 import 'package:stacklestory/icons/dragmovepare.dart';
 
 class Maingame extends StatefulWidget {
@@ -16,7 +15,7 @@ class Maingame extends StatefulWidget {
 class _MaingameState extends State<Maingame> {
   int score = 12800;
   MonsterQueue mq = MonsterQueue(4);
-  int stage = 6;
+  int stage = 7;
 
   @override
   void initState() {
@@ -238,9 +237,9 @@ class _MaingameState extends State<Maingame> {
                 DragMovePair(
                   pumpkinAsset: 'assets/images/icons/집게.png',
                   overlayAsset: monsterData[mq.queue[0]]['name'],
-                  iconSize: 120,
+                  iconSize: 80,
                   overlaySize: monsterData[mq.queue[0]]['size'],
-                  overlayDy: 30,
+                  overlayDy: 20,
                   padding: 10,
                   onTap: () {
                     mq.next();
@@ -259,7 +258,6 @@ class _MaingameState extends State<Maingame> {
                 //     padding: 10,
                 //   ),
                 // ),
-                SizedBox(height: 10.h),
                 Container(
                   margin: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 0.h),
                   padding: EdgeInsets.fromLTRB(2.w, 16.h, 2.w, 12.h),
@@ -267,10 +265,40 @@ class _MaingameState extends State<Maingame> {
                     color: Color(0x8CFFFFFF),
                     borderRadius: BorderRadius.circular(12.r),
                   ),
-                  height: 500.h,
+                  height: 400.h,
+                  width: double.infinity,
                   child: SingleChildScrollView(
                     child: Column(children: [getRandomMonster(7)]),
                   ),
+                ),
+
+                Stack(
+                  clipBehavior: Clip.none, // 필요 시 클리핑 해제
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      height: 80.h,
+                      child: Image.asset(
+                        upgradeimg[Backgroundnum.bn],
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    // Row에게 '타이트한' 폭 제약 주기
+                    Positioned.fill(
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 60.0,
+                          ), // 여백 필요시
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: monsterUpgrade, // List<Widget> 여야 함
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

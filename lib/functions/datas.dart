@@ -10,22 +10,29 @@ List<String> backgroundsimg = [
   "assets/images/backgrounds/winter.png",
 ];
 
+List<String> upgradeimg = [
+  "assets/images/upgrades/whitearrow.png",
+  "assets/images/upgrades/whitearrow.png",
+  "assets/images/upgrades/whitearrow.png",
+  "assets/images/upgrades/whitearrow.png",
+];
+
 class Backgroundnum {
-  static int bn = 2;
+  static int bn = 0;
 }
 
 final List<Widget> monsterUpgrade = [
-  Image.asset("assets/images/monsters/달수.png", width: 12.w, height: 12.h),
-  Image.asset("assets/images/monsters/슬수.png", width: 12.w, height: 12.h),
-  Image.asset("assets/images/monsters/주수.png", width: 12.w, height: 12.h),
-  Image.asset("assets/images/monsters/리수.png", width: 12.w, height: 12.h),
-  Image.asset("assets/images/monsters/루수.png", width: 12.w, height: 12.h),
-  Image.asset("assets/images/monsters/주루수.png", width: 12.w, height: 12.h),
-  Image.asset("assets/images/monsters/스수.png", width: 12.w, height: 12.h),
-  Image.asset("assets/images/monsters/월수.png", width: 12.w, height: 12.h),
-  Image.asset("assets/images/monsters/예수.png", width: 12.w, height: 12.h),
-  Image.asset("assets/images/monsters/핑수.png", width: 12.w, height: 12.h),
-  Image.asset("assets/images/monsters/블수.png", width: 12.w, height: 12.h),
+  Image.asset("assets/images/monsters/달수.png", width: 20.w, height: 20.h),
+  Image.asset("assets/images/monsters/슬수.png", width: 20.w, height: 20.h),
+  Image.asset("assets/images/monsters/주수.png", width: 20.w, height: 20.h),
+  Image.asset("assets/images/monsters/리수.png", width: 20.w, height: 20.h),
+  Image.asset("assets/images/monsters/루수.png", width: 20.w, height: 20.h),
+  Image.asset("assets/images/monsters/주루수.png", width: 20.w, height: 20.h),
+  Image.asset("assets/images/monsters/스수.png", width: 20.w, height: 20.h),
+  Image.asset("assets/images/monsters/월수.png", width: 20.w, height: 20.h),
+  Image.asset("assets/images/monsters/예수.png", width: 20.w, height: 20.h),
+  Image.asset("assets/images/monsters/핑수.png", width: 20.w, height: 20.h),
+  Image.asset("assets/images/monsters/블수.png", width: 20.w, height: 20.h),
 ];
 
 // 단계별 몬스터 정의 (파일명, 크기)

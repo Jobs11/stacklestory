@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DragMovePair extends StatefulWidget {
   const DragMovePair({
@@ -33,14 +34,14 @@ class _DragMovePairState extends State<DragMovePair> {
     final overlayH = widget.overlaySize ?? widget.iconSize;
 
     return SizedBox(
-      height: widget.iconSize + widget.overlayDy + overlayH,
+      height: (widget.iconSize + widget.overlayDy + 105).h,
       child: LayoutBuilder(
         builder: (context, c) {
           final maxX = (c.maxWidth - widget.iconSize - widget.padding * 2)
               .clamp(0.0, double.infinity);
 
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: widget.padding),
+            padding: EdgeInsets.symmetric(horizontal: widget.padding.w),
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: widget.onTap,
@@ -56,17 +57,17 @@ class _DragMovePairState extends State<DragMovePair> {
                     top: 0,
                     child: Image.asset(
                       widget.pumpkinAsset,
-                      width: widget.iconSize,
-                      height: widget.iconSize,
+                      width: widget.iconSize.w,
+                      height: widget.iconSize.h,
                     ),
                   ),
                   Positioned(
-                    left: x + (widget.iconSize - overlayW) / 2,
+                    left: (x + (widget.iconSize - overlayW) / 2),
                     top: widget.iconSize - overlayH / 2 + widget.overlayDy,
                     child: Image.asset(
                       "assets/images/monsters/${widget.overlayAsset}.png",
-                      width: overlayW,
-                      height: overlayH,
+                      width: overlayW.w,
+                      height: overlayH.h,
                     ),
                   ),
                 ],
